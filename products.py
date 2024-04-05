@@ -5,3 +5,4 @@ class Product(BaseModel):
     description: str
     stock: int
     category: int
+    user_token: str

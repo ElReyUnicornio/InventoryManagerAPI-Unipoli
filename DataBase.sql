@@ -45,7 +45,7 @@ insert into `categories` (`name`) values ('Software');
 insert into `categories` (`name`) values ('Dispositivos');
 
 -- users default data
-insert into `users` (`name`, `enrollment`, `password`, `role`, `carreer`, `quarter`, `position`) values ('Alejandro', '2303150187', '123456789', 'Admin', '', 0, 'Admin');
+insert into `users` (`name`, `enrollment`, `password`, `role`, `carreer`, `quarter`, `position`) values ('Alejandro', '2303150187', '$2b$12$iMaHOVSOAS7oBSOMJ.BV0O3ny1o8ZdlbMErTvYwgIC36objgQiu9W', 'Admin', '', 0, 'Admin');
 
 -- products default data
 insert into `products` (`name`, `description`, `category`, `stock`) values ('Mouse', 'Mouse inalámbrico', 1, 10);

@@ -13,3 +13,7 @@ class Admin(User):
 class Student(User):
     carreer: Union[str, None]
     quarter: Union[int, None]
+    
+class Login_data(BaseModel):
+    enrollment: str
+    password: str
