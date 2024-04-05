@@ -80,6 +80,78 @@ class UsersManager():
             return {"error": str(e)}
         finally:
             conn.close()
+            
+    def get_logs(self):
+        """
+        Retrieves all the logs from the database.
+
+        Returns:
+            list: A list of dictionaries containing the logs. Each dictionary represents a log entry and contains the following keys: "date", "description", and "user".
+        """
+        conn = connection()
+        try:
+            if not conn: raise Exception("Database Connection Error")
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM logs")
+            rows = cursor.fetchall()
+            logs = []
+            for row in rows:
+                log = {"date": row[0], "description": row[1], "user": row[2]}
+                logs.append(log)
+            return logs
+        except Exception as e:
+            return {"error": str(e)}
+        finally:
+            conn.close()
+
+    def get_logs_by_user(self, enrollment: str):
+        """
+        Retrieves the logs from the database for a given user by its enrollment number.
+
+        Args:
+            enrollment (str): The enrollment number of the user.
+
+        Returns:
+            list: A list of dictionaries containing the logs for the user. Each dictionary represents a log entry and contains the following keys: "date", "description", and "user".
+        """
+        conn = connection()
+        try:
+            if not conn: raise Exception("Database Connection Error")
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM logs WHERE user = %s", (enrollment,))
+            rows = cursor.fetchall()
+            logs = []
+            for row in rows:
+                log = {"date": row[0], "description": row[1], "user": row[2]}
+                logs.append(log)
+            return logs
+        except Exception as e:
+            return {"error": str(e)}
+        finally:
+            conn.close()
+
+    def get_user_data(self, enrollment: str):
+        """
+        Retrieves the user data from the database for a given user by its enrollment number.
+
+        Args:
+            enrollment (str): The enrollment number of the user.
+
+        Returns:
+            dict: A dictionary containing the user information. The dictionary will contain the following keys: "name", "enrollment", "role", "carreer", "quarter", and "position".
+        """
+        conn = connection()
+        try:
+            if not conn: raise Exception("Database Connection Error")
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users WHERE enrollment = %s", (enrollment,))
+            row = cursor.fetchone()
+            if not row: raise Exception("User Not Found")
+            return {"name": row[0], "enrollment": row[1], "role": row[3], "carreer": row[4], "quarter": row[5], "position": row[6]}
+        except Exception as e:
+            return {"error": str(e)}
+        finally:
+            conn.close()
     
     def create_log(self, description: str, user: str):
         """

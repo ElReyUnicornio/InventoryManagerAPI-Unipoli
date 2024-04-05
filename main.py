@@ -133,6 +133,48 @@ def get_categories():
     """
     return inventoryManager.get_categories()
 
+@app.post("/get_logs/")
+def add_item(token: Token):
+    """
+    Get all the logs from the database.
+
+    Args:
+        Token: Token tha identifies the user.
+
+    Returns:
+        dict: All of the logs from the database.
+    """
+    user = verify_token(token)
+    return usersManager.get_logs()
+
+@app.post("/get_logs_by_user/")
+def get_logs_by_user(token: Token):
+    """
+    Get all the logs from the database for a specific user.
+
+    Args:
+        Token: Token tha identifies the user.
+
+    Returns:
+        dict: All of the logs from the database for a specific user.
+    """
+    user = verify_token(token)
+    return usersManager.get_logs_by_user(user["enrollment"])
+
+@app.post("/get_user/")
+def get_user(token: Token):
+    """
+    Get the user data from the database.
+
+    Args:
+        Token: Token tha identifies the user.
+
+    Returns:
+        dict: The user data from the database.
+    """
+    user = verify_token(token)
+    return usersManager.get_user_data(user["enrollment"])
+
 @app.post("/register/")
 def register(user: Union[Admin, Student]):
     """
