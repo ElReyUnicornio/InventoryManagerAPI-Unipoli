@@ -19,13 +19,13 @@ create table `products` (
 ) engine=InnoDB default charset=utf8;
 
 create table `users` (
-  `name` varchar(255) not null,
+  `name` varchar(50) not null,
   `enrollment` varchar(10) not null,
-  `password` varchar(255) not null,
+  `password` varchar(20) not null,
   `role` ENUM('Admin', 'Student') not null,
   `carreer` varchar(255),
-  `quarter` int(11),
-  `position` varchar(255),
+  `quarter` int(2),
+  `position` varchar(50),
   primary key (`enrollment`)
 ) engine=InnoDB default charset=utf8;
 
